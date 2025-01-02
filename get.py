@@ -7,14 +7,12 @@ export PASSWORD=<your garmin password>
 
 """
 import datetime
-from datetime import timezone
+#from datetime import timezone
 import json
 import logging
 import os
-import sys
 from getpass import getpass
 
-import readchar
 import requests
 from garth.exc import GarthHTTPError
 
@@ -25,6 +23,14 @@ from garminconnect import (
     GarminConnectTooManyRequestsError,
 )
 
+def get_credentials():
+    """Get user credentials."""
+
+    email = input("Login e-mail: ")
+    password = getpass("Enter password: ")
+
+    return email, password
+    
 def init_api(email, password):
     """Initialize Garmin API with your credentials."""
 
@@ -84,7 +90,10 @@ def init_api(email, password):
 
     return garmin
 
+def get_mfa():
+    """Get MFA."""
 
+    return input("MFA one-time code: ")
 # Configure debug logging
 # logging.basicConfig(level=logging.DEBUG)
 logging.basicConfig(level=logging.INFO)
